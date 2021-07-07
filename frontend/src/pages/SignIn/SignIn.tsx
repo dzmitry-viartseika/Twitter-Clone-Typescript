@@ -4,8 +4,10 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
 import PeopleIcon from '@material-ui/icons/PeopleOutline';
 import MessageIcon from '@material-ui/icons/ModeCommentOutlined';
+import { LoginModal } from '../../components/Modals/LoginModal';
+// import RegisterModal from '../../components/Modals/RegisterModal';
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
     wrapper: {
         display: 'flex',
         height: '100vh',
@@ -62,11 +64,36 @@ const useStyles = makeStyles((theme) => ({
     },
     loginSideSubtitle: {
         fontSize: 16
-    }
+    },
+    loginSideField: {
+        marginBottom: 18,
+    },
+    registerField: {
+        marginBottom: theme.spacing(5),
+    },
+    loginFormControl: {
+        marginBottom: theme.spacing(2),
+    },
 }))
 
 export default function SignIn() {
     const classes = useStyles();
+
+    const [visibleModal, setVisibleModal] = React.useState<'signIn' | 'signUp'>();
+
+    const handleClickOpenSignIn = (): void => {
+        setVisibleModal('signIn');
+    };
+
+    const handleClickOpenSignUp = (): void => {
+        setVisibleModal('signUp');
+    };
+
+    const handleCloseModal = (): void => {
+        setVisibleModal(undefined);
+    };
+    // @ts-ignore
+    // @ts-ignore
     return (
         <div className={classes.wrapper}>
             <section className={classes.description}>
@@ -112,6 +139,7 @@ export default function SignIn() {
                         color="primary"
                         fullWidth
                         className={classes.loginSideButtonSignIn}
+                        onClick={handleClickOpenSignUp}
                     >
                         Зарегистрироваться
                     </Button>
@@ -119,11 +147,14 @@ export default function SignIn() {
                         variant="outlined"
                         color="primary"
                         fullWidth
+                        onClick={handleClickOpenSignIn}
                     >
                         Войти
                     </Button>
                 </div>
             </section>
+            <LoginModal open={visibleModal === 'signIn'} onClose={handleCloseModal} />
+            {/*<RegisterModal open={visibleModal === 'signUp'} onClose={handleCloseModal} />*/}
         </div>
     );
 }
