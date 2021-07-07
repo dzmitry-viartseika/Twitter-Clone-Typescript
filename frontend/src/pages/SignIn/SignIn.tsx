@@ -5,7 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import PeopleIcon from '@material-ui/icons/PeopleOutline';
 import MessageIcon from '@material-ui/icons/ModeCommentOutlined';
 import { LoginModal } from '../../components/Modals/LoginModal';
-// import RegisterModal from '../../components/Modals/RegisterModal';
+import { RegisterModal } from '../../components/Modals/RegisterModal';
 
 export const useStyles = makeStyles((theme) => ({
     wrapper: {
@@ -92,8 +92,6 @@ export default function SignIn() {
     const handleCloseModal = (): void => {
         setVisibleModal(undefined);
     };
-    // @ts-ignore
-    // @ts-ignore
     return (
         <div className={classes.wrapper}>
             <section className={classes.description}>
@@ -154,7 +152,7 @@ export default function SignIn() {
                 </div>
             </section>
             <LoginModal open={visibleModal === 'signIn'} onClose={handleCloseModal} />
-            {/*<RegisterModal open={visibleModal === 'signUp'} onClose={handleCloseModal} />*/}
+            <RegisterModal open={visibleModal === 'signUp'} onClose={handleCloseModal} />
         </div>
     );
 }
